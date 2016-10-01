@@ -1,0 +1,22 @@
+使用文档：
+jcFlexible是根据手淘前端团队的flexible框架改写的一套框架，实现了不需要less编译的一套移动端样式的适配
+使用须知：
+1.需要引入jcFlexible.js
+2.创建一个id为flexContainer的div作为container
+3.所有dom元素都要写在container里面
+4.所有元素都用rem代替px（以设计图为准：例如设计图为750px，一个div标注200px，则设置css为200rem）
+5.可根据dpr来适配不同物理像素图片使用如下
+[data-dpr="1"] .selector{
+	
+}
+6.因为对元素进行了特殊处理，项目中不能用px，像素的大小和rem转化手册：
+10px = 120rem
+12px = 144rem 
+14px = 168rem   
+16px = 192rem    
+18px = 216rem    
+20px = 240rem    
+22px = 265rem    
+24px = 289rem  
+26px = 313rem
+正常大小约为1px ＝ 12rem，精准几乎可以忽略不计

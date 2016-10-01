@@ -1,0 +1,46 @@
+.navSpan{
+	margin-left: 5px;
+	line-height: 0px;
+}
+.indexContainer{
+	margin-top: 20px;
+}
+.indexContainer img{
+	width: 100%;
+	// height: 100%;
+}
+.containerContent{
+	width: 100%;
+	height: 150px;
+	overflow: hidden;
+}
+.containerContent1{
+	width: 100%;
+	height: 230px;
+	overflow: hidden;
+}
+.indexContainerLiPrice{
+	
+}
+.indexContainerLiIntroduce{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	height: 40px;
+	-webkit-box-orient: vertical;
+}
+.indexContainerLiSell{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+.indexContainerLiSkim{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}

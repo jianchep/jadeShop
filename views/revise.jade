@@ -1,0 +1,34 @@
+doctype html
+html(lang="zh-CN" ng-app="hyyApp" ng-controller="revise")
+  head
+    link(href="/stylesheets/revise.css" rel='stylesheet')
+  include ./includes/head
+  body
+    .container
+      .body
+        h2.lead.text-center revise the password
+        .alert.alert-danger.text-center.alert-dismissible(role="alert" ng-if='(!warnOrInfo)&&warnOrInfoClick')
+          strong Warning! 
+          |account is not exist.
+        .alert.alert-success.text-center.alert-dismissible(role="alert" ng-if='warnOrInfo&&warnOrInfoClick')
+          strong Success! 
+          |account is exist.
+        form.form
+          .form-group.input-group
+            input#inputError1.form-control(placeholder="Input account" ng-model='username')
+            .input-group-btn
+              button.btn.btn-default(type="button" ng-click='next()') next
+          .form-group
+            lable.exampleInputEmail1(for='inputError1') key-question:
+            input#inputError1.form-control(disabled placeholder="error:Null" ng-model='question')
+          .form-group
+            lable.exampleInputPassword1 answer:
+            input#exampleInputPassword1.form-control(placeholder="Input answer" ng-model='answer' type='password')
+          .form-group
+            lable.exampleInputPassword1 new password:
+            input#exampleInputPassword1.form-control(placeholder="Input new password" ng-model='password' type='password')
+        button.btn.btn-sm.btn-primary(disabled type="button" ng-if='(!answer)||(!username)||(!warnOrInfo)||(!password)') revise
+        button.btn.btn-sm.btn-primary(type="button" ng-if='answer&&username&&warnOrInfo&&password' ng-click='revise()') revise
+        button.btn.btn-sm.btn-link(type="button" ng-click='login()') login
+    script(src='/javascripts/angular.min.js')
+    script(src='/javascripts/revise.js')

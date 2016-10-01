@@ -1,0 +1,50 @@
+doctype html
+html(lang="zh-CN" ng-app="hyyApp")
+  head
+    link(href="/stylesheets/good.css" rel='stylesheet')
+  include ./includes/head
+  body
+    include ./includes/nav
+    .container(ng-controller='good')
+      .row.indexContainer
+        .col-sm-6.col-md-4
+          .thumbnail
+            .containerContent
+              //- img(src='/images/banner.jpeg')
+              img(ng-src='{{goodInfo[0].photo}}')
+        .col-sm-9.col-md-7
+          .thumbnail
+            .caption
+              h3(ng-bind='goodInfo[0].title')
+              p store
+              p(ng-bind='goodInfo[0].introduce')
+              table.table.table-bordered
+                tr
+                  td price
+                  td goods_number
+                  td skim_number
+                tr
+                  td(ng-bind='goodInfo[0].price')
+                  td(ng-bind='goodInfo[0].goods_number')
+                  td(ng-bind='goodInfo[0].skim_number')
+              p
+                input.bootInput(ng-model='num' ng-keyup='keyup()')
+                button.btn.btn-default.btn-xs(ng-click='upNum()')
+                  span +
+                button.btn.btn-default.btn-xs(ng-click='downNum()')
+                  span -
+              p
+                button.btn.btn-default.btn-sm(type="button" ng-click='buy()')
+                  span &nbsp;&nbsp;Buy&nbsp;&nbsp;
+                span.navSpan
+                button.btn.btn-default.btn-sm(type="button" ng-click='add()')
+                  span.glyphicon.glyphicon-shopping-cart Add
+              button.btn.btn-default.btn-xs(type="button" ng-if='collectFlag' ng-click='collectNo()')
+                span.glyphicon.glyphicon-star
+              button.btn.btn-default.btn-xs(type="button" ng-if='!collectFlag' ng-click='collectYes()')
+                span.glyphicon.glyphicon-star-empty
+      .container
+        p this is comment
+    include ./includes/body
+    script(src='javascripts/good.js')
+    script(src='layout/nav.js')

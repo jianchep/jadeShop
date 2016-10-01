@@ -1,0 +1,38 @@
+doctype html
+html(lang="zh-CN" ng-app="hyyApp" ng-controller="login")
+  head
+    link(href="/stylesheets/login.css" rel='stylesheet')
+  include ./includes/head
+  body
+    .container
+      .body
+        h2.lead.text-center login the shop
+        //- .alert.alert-info.text-center.alert-dismissible(role="alert" ng-if='warnOrInfo')
+        //-   strong Info: 
+        //-   |Please enter the account password.
+        .alert.alert-danger.text-center.alert-dismissible(role="alert" ng-if='!warnOrInfo')
+          strong Warning! 
+          |Account or password is wrong.
+        form.form
+          .form-group
+            lable.exampleInputEmail1(for='inputError1') account:
+            input#inputError1.form-control(placeholder="Input account" ng-model='username')
+          .form-group
+            lable.exampleInputPassword1 password:
+            input#exampleInputPassword1.form-control(placeholder="Input password" ng-model='password' type='password')
+        .checkbox
+          label.checkbox.disabled(ng-if='!username')
+            input(type="checkbox" value="12312" disabled)
+            div remember the account
+              span.remind &nbsp;(Please enter your account)
+          label.checkbox(ng-if='username')
+            input(type="checkbox" value="12312" ng-click='chooseMemberUsername()')
+            div remember the account
+        p if you lose you password please click <mark class='revise' ng-click='revise()'>revise</mark>
+        button.btn.btn-sm.btn-primary(disabled type="button" ng-if='(!password)||(!username)') login
+        button.btn.btn-sm.btn-primary(type="button" ng-if='password&&username' ng-click='login()') login
+        
+        //- button.btn.btn-sm.btn-primary(disabled type="button") register
+        button.btn.btn-sm.btn-link(type="button" ng-click='register()') register
+    script(src='/javascripts/angular.min.js')
+    script(src='/javascripts/login.js')

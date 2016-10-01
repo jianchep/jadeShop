@@ -1,0 +1,48 @@
+doctype html
+html(lang="zh-CN" ng-app="hyyApp")
+  head
+    link(href="/stylesheets/index.css" rel='stylesheet')
+  include ./includes/head
+  body
+    include ./includes/nav
+    .container(ng-controller="index")
+      ul.nav.nav-tabs(role="tablist")
+        li(role="presentation" ng-class="{true: 'active'}[isActive[0]]" ng-click='activeOne()')
+          a(href="#") All Goods
+        li(role="presentation" ng-class="{true: 'active'}[isActive[1]]" ng-click='activeTwo()')
+          a(href="#") Clothes
+        li(role="presentation" ng-class="{true: 'active'}[isActive[2]]" ng-click='activeThree()')
+          a(href="#") Books
+      .row.indexContainer(ng-if='allGoods[0]')
+        .col-xs-6.col-md-3(ng-repeat='good in allGoods' ng-click='goodClick(good)')
+          a.thumbnail(href="javascript:void(0)")
+            .containerContent
+              img(ng-src='{{good.photo}}')
+            .caption
+              h4.indexContainerLiPrice 
+              span.glyphicon.glyphicon-usd
+              span 11.00
+              p.indexContainerLiIntroduce(ng-bind='good.introduce')
+              p.indexContainerLiSell 
+                span(ng-bind='good.comment_number')
+                span 人评论
+              p.indexContainerLiSkim 
+                span(ng-bind='good.skim_number')
+                span 人预览
+      nav.text-center(ng-if='allGoods[0]')
+        ul.pagination
+          li.disabled(ng-if='isStartDisabled')
+            a(href="javascript:void(0)") &laquo;
+          li(ng-if='!isStartDisabled' ng-click='indexPrev()')
+            a(href="javascript:void(0)") &laquo;
+          li(ng-repeat='good in goodsIndexArr track by $index' ng-click='indexClick(good)')
+            a(href="javascript:void(0)" ng-bind='good')
+          li(ng-if='!isEndDisabled' ng-click='indexNext()')
+            a(href="javascript:void(0)") &raquo;
+          li.disabled(ng-if='isEndDisabled')
+            a(href="javascript:void(0)") &raquo;
+      .panel.panel-default.indexContainer(ng-if='!allGoods[0]')
+        .panel-body 无商品信息
+    include ./includes/body
+    script(src='/javascripts/index.js')
+    script(src='layout/nav.js')

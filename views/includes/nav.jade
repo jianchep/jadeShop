@@ -1,0 +1,57 @@
+nav.navbar.navbar-default(role="navigation" ng-controller='nav')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" type="button")
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href="javascript:void(0)") Jade
+    .collapse.navbar-collapse#bs-example-navbar-collapse-1
+      ul.nav.navbar-nav
+        li.active
+          a(href="javascript:void(0)") 
+            span.glyphicon.glyphicon-exclamation-sign(ng-if='!realname' ng-click='routerLogin()')
+            span.navSpan(ng-if='!realname' ng-click='routerLogin()') Please Login
+            span.glyphicon.glyphicon-user(ng-if='realname')
+            span.navSpan(ng-if='realname' ng-bind='realname')
+        li(ng-click='routerIndex()')
+          a(href='javascript:void(0)') 
+            span.glyphicon.glyphicon-home
+            span.navSpan Profile
+        li.dropdown
+          a.dropdown-toggle(href="javascript:void(0)" data-toggle="dropdown") My Shop
+           span.caret
+          ul.dropdown-menu(role="menu")
+            li(ng-click='purchare()')
+              a(href="javascript:void(0)") purchare goods
+            li.divider
+            li(ng-click='feet()')
+              a(href="javascript:void(0)") my feet
+      form.navbar-form.navbar-left(role="search")
+        .form-group
+          input.form-control(placeholder="Search" type="text" ng-model='input')
+        button.btn.btn-default(type="submit" ng-click='submitClick()') submit
+      ul.nav.navbar-nav.navbar-right
+        li(ng-click='cart()')
+          a(href="javascript:void(0)") 
+            span.glyphicon.glyphicon-shopping-cart
+            span.navSpan Shopping cart
+        li(ng-click='collect()')
+          a(href="javascript:void(0)") 
+            span.glyphicon.glyphicon-heart
+            span.navSpan Collect
+        li.dropdown
+          a.dropdown-toggle(data-toggle="dropdown" href="javascript:void(0)") Seller
+            span.caret
+          ul.dropdown-menu(role="menu")
+            li
+              a(href="javascript:void(0)") set up shop
+            li.divider
+            li
+              a(href="javascript:void(0)") Order Manage
+            li.divider
+            li
+              a(href="javascript:void(0)") Selling goods
+            li
+              a(href="javascript:void(0)") Reserve

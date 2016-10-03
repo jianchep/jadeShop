@@ -1,0 +1,95 @@
+#chatInput{
+	position:fixed;
+	bottom: 0;
+}
+.chatContentLeft{
+	margin-top: 10px;
+	position: relative;
+}
+.chatContentLeft img{
+	display: block;
+	// width：20px;
+	max-width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	float: left;
+}
+.chatContentLeft div{
+	margin-left: 40px;
+}
+.chatContentLeft div p{
+	padding: 2px;
+	display: inline-block;
+	border: 1px solid #e1e1e8;
+	background: #f7f7f9;
+}
+.chatLeftFlag1{
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -7px;
+	border-right: 8px solid  #e1e1e8 ;
+	border-top: 8px solid transparent ;
+	border-bottom: 8px solid transparent ;
+}
+.chatLeftFlag2{
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -6px;
+	border-right: 8px solid  #f7f7f9 ;
+	border-top: 8px solid transparent ;
+	border-bottom: 8px solid transparent ;
+}
+.chatCenter{
+	text-align: center;
+}
+
+
+
+
+
+
+.chatContentRight{
+	width: 100%;
+	margin-top: 10px;
+	position: relative;
+}
+.chatContentRight img{
+	display: block;
+	max-width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	float: right;
+}
+.chatContentRight div{
+	margin-right: 40px;
+}
+.chatContentRight div p{
+	float: right;
+	padding: 2px;
+	display: inline-block;
+	border: 1px solid #e1e1e8;
+	background: #f7f7f9;
+}
+.clear{
+	clear:both;
+}
+.chatRightFlag1{
+	position: absolute;
+	width: 0;
+	height: 0;
+	right: -7px;
+	border-left: 8px solid  #e1e1e8 ;
+	border-top: 8px solid transparent ;
+	border-bottom: 8px solid transparent ;
+}
+.chatRightFlag2{
+	position: absolute;
+	width: 0;
+	height: 0;
+	right: -6px;
+	border-left: 8px solid  #f7f7f9 ;
+	border-top: 8px solid transparent ;
+	border-bottom: 8px solid transparent ;
+}

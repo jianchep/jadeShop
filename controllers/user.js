@@ -1,8 +1,8 @@
 var userApi = require('../api/user')
-
 module.exports = {
   login: function (req, res) {
     userApi.login(req, res, function (data) {
+      res.cookie('user', req.body.username, {maxAge: 1000 * 60 * 60 * 24 * 30})
       res.json(data)
       res.end()
     })
@@ -38,5 +38,8 @@ module.exports = {
     } else {
       res.render('login')
     }
+  },
+  chat: function (req, res, next) {
+    res.render('chat')
   }
 }

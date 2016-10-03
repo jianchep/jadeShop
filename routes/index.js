@@ -35,6 +35,11 @@ router.get('/cart', userControllers.isLogin, function (req, res, next) {
 router.get('/purchare', userControllers.isLogin, function (req, res, next) {
   res.render('purchare')
 })
+// router.get('/chat', function (req, res, next) {
+//   res.render('chat')
+// })
+
+router.get('/chat', userControllers.chat)
 /* GET test page. */
 router.get('/i', userControllers.isLogin, function (req, res, next) {
   res.render('index')

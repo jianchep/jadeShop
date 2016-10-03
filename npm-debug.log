@@ -7,8 +7,8 @@
 6 silly lifecycle jadeShop@0.0.0~predev: no script for predev, continuing
 7 info lifecycle jadeShop@0.0.0~dev: jadeShop@0.0.0
 8 verbose lifecycle jadeShop@0.0.0~dev: unsafe-perm in lifecycle true
-9 verbose lifecycle jadeShop@0.0.0~dev: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/peijiancheng/nodejs/jadeShop/node_modules/.bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-10 verbose lifecycle jadeShop@0.0.0~dev: CWD: /Users/peijiancheng/nodejs/jadeShop
+9 verbose lifecycle jadeShop@0.0.0~dev: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/peijiancheng/workSpace/jadeShop/node_modules/.bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+10 verbose lifecycle jadeShop@0.0.0~dev: CWD: /Users/peijiancheng/workSpace/jadeShop
 11 silly lifecycle jadeShop@0.0.0~dev: Args: [ '-c', 'supervisor ./bin/www' ]
 12 silly lifecycle jadeShop@0.0.0~dev: Returned: code: 1  signal: null
 13 info lifecycle jadeShop@0.0.0~dev: Failed to exec dev script
@@ -23,7 +23,7 @@
 14 verbose stack     at maybeClose (internal/child_process.js:852:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
 15 verbose pkgid jadeShop@0.0.0
-16 verbose cwd /Users/peijiancheng/nodejs/jadeShop
+16 verbose cwd /Users/peijiancheng/workSpace/jadeShop
 17 error Darwin 15.5.0
 18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "dev"
 19 error node v6.3.1

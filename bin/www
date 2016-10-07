@@ -6,7 +6,8 @@
 
 var app = require('../app');
 var debug = require('debug')('jadeShop:server');
-var http = require('http');
+var http = require('http')
+var chatApi = require('../api/chat')
 
 
 /**
@@ -25,8 +26,6 @@ var server = http.createServer(app)
 var io = require('socket.io').listen(server)
 io.sockets.on('connection', function (socket) {
   socket.on('online', function (data) {
-    // console.log(data)
-    console.log('上线了')
     socket.name = data.user
     if (!users[data.user]) {
       users[data.user] = data.user
@@ -40,16 +39,32 @@ io.sockets.on('connection', function (socket) {
     }
   })
   socket.on('say', function (data) {
-    console.log(data)
-    if (data.to === 'all') {
-      socket.broadcast.emit('say', data)
-    } else {
-      var clients = io.sockets.clients()
-      clients.forEach(function (client) {
-        if (client.name === data.to) {
-          client.emit('say', data)
-        }
-      })
+    // chatApi.insertChat(data, function (cont) {
+    //   console.log('cont--->', cont)
+    //   if (cont) {
+    //     if (data.to === 'all') {
+    //       socket.broadcast.emit('say', data)
+    //     } else {
+    //       var clients = io.sockets.clients()
+    //       clients.forEach(function (client) {
+    //         if (client.name === data.to) {
+    //           client.emit('say', data)
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
+    if (data.to !== null) {
+      if (data.to === 'all') {
+        socket.broadcast.emit('say', data)
+      } else {
+        var clients = io.sockets.clients()
+        clients.forEach(function (client) {
+          if (client.name === data.to) {
+            client.emit('say', data)
+          }
+        })
+      }
     }
   })
 })

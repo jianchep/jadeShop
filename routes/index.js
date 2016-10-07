@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var userControllers = require('../controllers/user')
 var shopControllers = require('../controllers/shop')
+var chatControllers = require('../controllers/chat')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -71,5 +72,9 @@ router.post('/updateShop', shopControllers.updateShop)
 router.post('/deleteDate', shopControllers.deleteDate)
 router.post('/updateIsbuy', shopControllers.updateIsbuy)
 router.post('/insertOrder', shopControllers.insertOrder)
+
+/* ChatController router. */
+router.post('/getChatDate', chatControllers.getChatDate)
+router.post('/getHistoryDate', chatControllers.getHistoryDate)
 
 module.exports = router

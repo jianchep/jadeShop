@@ -1,32 +1,27 @@
 doctype html
 html(lang="zh-CN" ng-app="hyyApp" ng-controller="chat")
   head
+    title(ng-bind='chatName')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     link(href="/stylesheets/chat.css" rel='stylesheet')
   include ./includes/head
   body
-    .container
-      p.chatCenter 与xxx聊天
-      //- p.chatCenter xxx事件
-      //- .chatContentLeft
-      //-   .chatLeftFlag1
-      //-   .chatLeftFlag2
-      //-   img(src='/images/banner.jpeg')
-      //-   div 
-      //-     p 123sl你好你
-      //- .chatContentRight
-      //-   .chatRightFlag1
-      //-   .chatRightFlag2
-      //-   img(src='/images/banner.jpeg')
-      //-   div 
-      //-     p 123sl你好你好
-      //-   .clear
-      //- .chatContentRight
-      //-   .chatRightFlag1
-      //-   .chatRightFlag2
-      //-   img(src='/images/banner.jpeg')
-      //-   div 
-      //-     p 123sl你好
-      //-   .clear
+    //- p.chatCenter.title 与<span ng-bind='chatName'></span>聊天
+    .container#contentChat
+      div(ng-repeat='data in chatDate')
+        .chatContentLeft(ng-if='data.to === username')
+          .chatLeftFlag1
+          .chatLeftFlag2
+          img(src='/images/banner.jpeg')
+          div 
+            p(ng-bind='data.msg')
+        .chatContentRight(ng-if='data.from === username')
+          .chatRightFlag1
+          .chatRightFlag2
+          img(src='/images/banner.jpeg')
+          div 
+            p(ng-bind='data.msg' ng-click='until(data)')
+          .clear
     #chatInput
       .input-group
         input.form-control(type="text" ng-model='input')
@@ -34,7 +29,8 @@ html(lang="zh-CN" ng-app="hyyApp" ng-controller="chat")
           botton.btn.btn-default(type="button" ng-click='say()' ng-if='input') submit
           botton.btn.btn-default(disabled type="button" ng-if='!input') submit
     include ./includes/body
-    script(src='javascripts/jquery.min.js')
-    script(src='javascripts/jquery.cookie.js')
+    script(src='javascripts/layout/zepto.js')
+    script(src='javascripts/layout/touch.js')
+    script(src='javascripts/layout/jquery.cookie.js')
     script(src='/socket.io/socket.io.js')
     script(src='/javascripts/chat.js')

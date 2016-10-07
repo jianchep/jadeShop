@@ -2,13 +2,15 @@
 	position:fixed;
 	bottom: 0;
 }
+#contentChat{
+	padding-bottom: 40px;
+}
 .chatContentLeft{
 	margin-top: 10px;
 	position: relative;
 }
 .chatContentLeft img{
 	display: block;
-	// width：20px;
 	max-width: 30px;
 	height: 30px;
 	border-radius: 30px;

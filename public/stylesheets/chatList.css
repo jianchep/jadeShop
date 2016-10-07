@@ -1,0 +1,48 @@
+body{
+	background-color: #eee;
+}
+.chatListLi{
+	height: 60px;
+	border-bottom: 1px solid #aaa;
+}
+.badge{
+	float: right;
+	margin-right: 10px;
+}
+#chatListContainer{
+	background: #fff
+}
+.chatListLi img {
+	width: 40px;
+	height: 40px;
+	// margin-top: 10px;
+	float: left;
+}
+.chatListInfo{
+	// background: red;
+	height: 40px;
+	margin-top: 10px;
+	margin-left: 50px;
+}
+.chatListTop{
+	height: 20px;
+}
+.chatListTitle{
+	width: 60%;
+	float: left;
+}
+.chatList{
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+	float: right;
+}
+.chatListContent{
+	width: 90%;
+	height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}

@@ -1,0 +1,30 @@
+doctype html
+html(lang="zh-CN" ng-app="hyyApp" ng-controller="chat")
+  head
+    title(ng-bind='chatName')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+  include ./includes/head
+    link(href="/stylesheets/chatList.css" rel='stylesheet')
+  body
+    .row
+      .col-lg-6
+        .input-group
+          input.form-control(type="text")
+          span.input-group-btn
+            button.btn.btn-default(type="button") serach
+    .container
+      ul
+        li.chatListLi(ng-repeat='chatList in chatLists' ng-click='chatListClick(chatList)')
+          img(src='/images/patient.png')
+          .chatListInfo
+            .chatListTop
+              .chatListTitle(ng-bind='chatList.chatList_chatname')
+              .chatList(ng-bind='chatList.time')
+              .badge(ng-bind='chatList.chatList_chat' ng-if='chatList.chatList_chat')
+            .chatListContent(ng-bind='chatList.chatList_content')
+    include ./includes/body
+    script(src='javascripts/layout/zepto.js')
+    script(src='javascripts/layout/touch.js')
+    script(src='javascripts/layout/jquery.cookie.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/chatList.js')

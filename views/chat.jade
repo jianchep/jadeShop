@@ -3,8 +3,8 @@ html(lang="zh-CN" ng-app="hyyApp" ng-controller="chat")
   head
     title(ng-bind='chatName')
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
-    link(href="/stylesheets/chat.css" rel='stylesheet')
   include ./includes/head
+    link(href="/stylesheets/chat.css" rel='stylesheet')
   body
     //- p.chatCenter.title 与<span ng-bind='chatName'></span>聊天
     .container#contentChat
@@ -12,13 +12,13 @@ html(lang="zh-CN" ng-app="hyyApp" ng-controller="chat")
         .chatContentLeft(ng-if='data.to === username')
           .chatLeftFlag1
           .chatLeftFlag2
-          img(src='/images/banner.jpeg')
+          img(src='/images/patient.png')
           div 
             p(ng-bind='data.msg')
         .chatContentRight(ng-if='data.from === username')
           .chatRightFlag1
           .chatRightFlag2
-          img(src='/images/banner.jpeg')
+          img(src='/images/patient.png')
           div 
             p(ng-bind='data.msg' ng-click='until(data)')
           .clear

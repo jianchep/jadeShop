@@ -38,8 +38,5 @@ module.exports = {
     } else {
       res.render('login')
     }
-  },
-  chat: function (req, res, next) {
-    res.render('chat')
   }
 }

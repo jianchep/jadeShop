@@ -10,6 +10,19 @@
     $scope.touchMove = []
     var socket = window.io.connect()
     var from = window.$.cookie('user')
+    /* update chatlist for msg state. */
+    function updateChatList () {
+      $http({
+        url: '/updateChatList',
+        method: 'POST',
+        data: {
+          'username': window.utils.getQuery('username'),
+          'chatname': window.utils.getQuery('chatName')
+        }
+      }).success(function (data) {
+        console.log(data)
+      })
+    }
     /* GET showchat for six data chat msg. */
     function getDate () {
       $http({
@@ -101,11 +114,12 @@
     //   window.$(document).scrollTop(window.$(document).height() - $scope.height)
     // })
     socket.on('say', function (data) {
+      updateChatList()
       console.log(data)
       var str = '<div class="chatContentLeft">' +
                 '<div class="chatLeftFlag1"></div>' +
                 '<div class="chatLeftFlag2"></div>' +
-                '<img src="/images/banner.jpeg"/>' +
+                '<img src="/images/patient.png"/>' +
                 '<div>' +
                   '<p>' + data.msg + '</p>' +
                 '</div>' +
@@ -117,7 +131,7 @@
       var str = '<div class="chatContentRight">' +
                   '<div class="chatRightFlag1"></div>' +
                   '<div class="chatRightFlag2"></div>' +
-                  '<img src="/images/banner.jpeg"/>' +
+                  '<img src="/images/patient.png"/>' +
                   '<div>' +
                     '<p>' + $scope.input + '</p>' +
                   '</div>' +

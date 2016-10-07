@@ -29,6 +29,26 @@ module.exports = {
       callback(rows)
     })
   },
+  upDataChatList: function (data, callback) {
+    connection.query('select * from chatList where chatList_username = ? and chatList_chatname = ?', [data.to, data.from], function (err, rows, fields) {
+      console.log('rows--->', rows)
+      if (rows[0]) {
+        console.log('info--->', [rows[0].chatList_chat + 1, data.msg, data.to, data.from])
+        connection.query('UPDATE chatList SET chatList_chat = ? where chatList_username = ? and chatList_chatname = ? ', [rows[0].chatList_chat + 1, data.to, data.from], function (err, cont, fields) {
+        })
+        connection.query('UPDATE chatList SET chatList_content = ? where chatList_username = ? and chatList_chatname = ? ', [data.msg, data.to, data.from], function (err, cont, fields) {
+        })
+        connection.query('UPDATE chatList SET chatList_time = ? where chatList_username = ? and chatList_chatname = ? ', [new Date().getTime(), data.to, data.from], function (err, cont, fields) {
+          callback(cont)
+        })
+      } else {
+        connection.query('insert into chatList(chatList_id,chatList_username,chatList_chatname,chatList_time,chatList_content,chatList_chat)values(null,?,?,?,?,1)', [data.to, data.from, new Date().getTime(), data.msg], function (err, cont, fields) {
+          callback(cont)
+        })
+      }
+      callback(rows)
+    })
+  },
   getChatDate: function (req, res, callback) {
     connection.query('select * from chat where (chat.from = ? and chat.to = ?) or (chat.from = ? and chat.to = ?) order by chat_id desc limit 0,6', [req.body.from, req.body.to, req.body.to, req.body.from], function (err, rows, fields) {
       callback(rows)
@@ -36,6 +56,16 @@ module.exports = {
   },
   getHistoryDate: function (req, res, callback) {
     connection.query('select * from chat where (chat.from = ? and chat.to = ?) or (chat.from = ? and chat.to = ?) order by chat_id desc limit ?,?', [req.body.from, req.body.to, req.body.to, req.body.from, (req.body.index - 1) * 20 + 6, req.body.index * 20 + 6], function (err, rows, fields) {
+      callback(rows)
+    })
+  },
+  getChatListData: function (req, res, callback) {
+    connection.query('select * from chatList where chatList_username = ? order by chatList_time desc', [req.body.username], function (err, rows, fields) {
+      callback(rows)
+    })
+  },
+  updateChatList: function (req, res, callback) {
+    connection.query('UPDATE chatList SET chatList_chat = 0 where chatList_username = ? and chatList_chatname = ?', [req.body.username, req.body.chatname], function (err, rows, fields) {
       callback(rows)
     })
   }

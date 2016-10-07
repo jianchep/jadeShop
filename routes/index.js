@@ -36,11 +36,13 @@ router.get('/cart', userControllers.isLogin, function (req, res, next) {
 router.get('/purchare', userControllers.isLogin, function (req, res, next) {
   res.render('purchare')
 })
-// router.get('/chat', function (req, res, next) {
-//   res.render('chat')
-// })
+router.get('/chat', userControllers.isLogin, function (req, res, next) {
+  res.render('chat')
+})
+router.get('/chatList', userControllers.isLogin, function (req, res, next) {
+  res.render('chatList')
+})
 
-router.get('/chat', userControllers.chat)
 /* GET test page. */
 router.get('/i', userControllers.isLogin, function (req, res, next) {
   res.render('index')
@@ -76,5 +78,7 @@ router.post('/insertOrder', shopControllers.insertOrder)
 /* ChatController router. */
 router.post('/getChatDate', chatControllers.getChatDate)
 router.post('/getHistoryDate', chatControllers.getHistoryDate)
+router.post('/getChatListData', chatControllers.getChatListData)
+router.post('/updateChatList', chatControllers.updateChatList)
 
 module.exports = router

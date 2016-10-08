@@ -33,6 +33,10 @@ nav.navbar.navbar-default(role="navigation" ng-controller='nav')
           input.form-control(placeholder="Search" type="text" ng-model='input')
         button.btn.btn-default(type="submit" ng-click='submitClick()') submit
       ul.nav.navbar-nav.navbar-right
+        li(ng-click='chatList()')
+          a(href="javascript:void(0)") 
+            span.glyphicon.glyphicon-comment
+            span.navSpan(ng-bind='chatNumber' ng-if='chatNumber')
         li(ng-click='cart()')
           a(href="javascript:void(0)") 
             span.glyphicon.glyphicon-shopping-cart

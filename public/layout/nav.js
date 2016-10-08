@@ -1,4 +1,30 @@
 var TimeByClinicNav = function ($scope, $http) {
+  var socket = window.io.connect()
+  var from = window.$.cookie('user')
+  socket.emit('online', {user: from})
+  socket.on('online', function (data) {
+    console.log(data)
+  })
+  socket.on('say', function (data) {
+    chatList()
+    $scope.$apply()
+  })
+  $scope.chatNumber = 0
+  function chatList () {
+    $http({
+      url: '/getChatListData',
+      method: 'POST',
+      data: {
+        'username': window.utils.getQuery('username')
+      }
+    }).success(function (data) {
+      $scope.chatNumber = 0
+      for (var i = 0; i < data.length; i++) {
+        $scope.chatNumber += data[i].chatList_chat
+      }
+    })
+  }
+  chatList()
   $scope.input = window.utils.getQuery('q') || ''
   if (window.localStorage.getItem('realname')) {
     $scope.realname = window.localStorage.getItem('realname') || ''
@@ -33,6 +59,10 @@ var TimeByClinicNav = function ($scope, $http) {
   }
   $scope.purchare = function () {
     var str = '/purchare?username=' + window.utils.getQuery('username')
+    window.location = str
+  }
+  $scope.chatList = function () {
+    var str = '/chatList?username=' + window.utils.getQuery('username')
     window.location = str
   }
 }

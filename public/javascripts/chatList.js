@@ -58,13 +58,6 @@
     socket.on('say', function (data) {
       console.log(data)
       chatList()
-      // for (var i = 0; i < $scope.chatLists.length; i++) {
-      //   if ($scope.chatLists[i].chatList_chatname === data.from) {
-      //     console.log(123)
-      //     $scope.chatLists[i].chatList_chat = $scope.chatLists[i].chatList_chat + 1
-      //     $scope.chatLists[i].chatList_content = data.msg
-      //   }
-      // }
       $scope.$apply()
     })
   }

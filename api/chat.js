@@ -68,5 +68,10 @@ module.exports = {
     connection.query('UPDATE chatList SET chatList_chat = 0 where chatList_username = ? and chatList_chatname = ?', [req.body.username, req.body.chatname], function (err, rows, fields) {
       callback(rows)
     })
+  },
+  updateChat: function (data, callback) {
+    connection.query('UPDATE chat SET chat.read = 1 where chat.from = ? and chat.to = ? and chat.read=0', [data.to, data.from], function (err, rows, fields) {
+      callback(rows)
+    })
   }
 }

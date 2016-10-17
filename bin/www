@@ -50,6 +50,33 @@ io.sockets.on('connection', function (socket) {
       }
     })
   })
+  socket.on('focus', function (data) {
+    var clients = io.sockets.clients()
+    clients.forEach(function (client) {
+      if (client.name === data.to) {
+        client.emit('focus', data)
+      }
+    })
+  })
+  socket.on('blur', function (data) {
+    var clients = io.sockets.clients()
+    clients.forEach(function (client) {
+      if (client.name === data.to) {
+        client.emit('blur', data)
+      }
+    })
+  })
+  socket.on('see', function (data) {
+    chatApi.updateChat(data, function (conts) {
+      console.log('conts--->', conts)
+      var clients = io.sockets.clients()
+      clients.forEach(function (client) {
+        if (client.name === data.to) {
+          client.emit('see', data)
+        }
+      })
+    })
+  })
   socket.on('disconnect', function () {
     if (users[socket.name]) {
       delete users[socket.name]

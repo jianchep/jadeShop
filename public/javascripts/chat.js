@@ -2,6 +2,7 @@
     $scope.input = ''
     $scope.username = window.utils.getQuery('username')
     $scope.chatName = window.utils.getQuery('chatName')
+    $scope.showName = window.utils.getQuery('chatName')
     $scope.height = window.$(document).height()
     $scope.chatDate = []
     $scope.index = 1
@@ -23,6 +24,11 @@
         console.log(data)
       })
     }
+    /* update chat for read state. */
+    function updateChat () {
+
+    }
+    updateChat()
     /* GET showchat for six data chat msg. */
     function getDate () {
       $http({
@@ -86,7 +92,15 @@
         })
       }
     }
-
+    /* UPDATE view data state. */
+    function readState () {
+      for (var i = 0; i < $scope.chatDate.length; i++) {
+        if ($scope.chatDate[i].read === 0) {
+          $scope.chatDate[i].read = 1
+        }
+      }
+      $scope.$apply()
+    }
     /* GET now time. */
     function nowTime () {
       var date = new Date()
@@ -96,54 +110,101 @@
     getDate()
     /* socket.io emit and on. */
     socket.emit('online', {user: from})
+    socket.emit('see', {from: from, to: window.utils.getQuery('chatName')})
     socket.on('online', function (data) {
       console.log(data)
       console.log(data.from)
       var str = ''
       if (data.user !== from) {
-        str = '<p class="chatCenter">用户 ' + data.user + ' 上线了！</p>'
+        // str = '<p class="chatCenter">用户 ' + data.user + ' 上线了！</p>'
       } else {
-        str = '<p class="chatCenter">' + nowTime() + '</p>'
+        // str = '<p class="chatCenter">' + nowTime() + '</p>'
       }
       window.$('.container').append(str)
       window.$(document).scrollTop(window.$(document).height() - $scope.height)
     })
-    // socket.on('offline', function (data) {
-    //   var str = '<p class="chatCenter">用户 ' + data.user + ' 下线了！</p>'
-    //   window.$('.container').append(str)
-    //   window.$(document).scrollTop(window.$(document).height() - $scope.height)
-    // })
+    socket.on('see', function (data) {
+      readState()
+    })
+    socket.on('focus', function (data) {
+      if (data.from === window.utils.getQuery('chatName')) {
+        $scope.focusNumber = 0
+        $scope.showName = '对方正在讲话'
+        $scope.interval = setInterval(function () {
+          if ($scope.focusNumber === 3) {
+            $scope.showName = '对方正在讲话'
+            $scope.focusNumber = 0
+          } else {
+            $scope.showName += '.'
+            $scope.focusNumber++
+          }
+          $scope.$apply()
+        }, 1000)
+        $scope.$apply()
+      }
+    })
+    socket.on('blur', function (data) {
+      $scope.showName = window.utils.getQuery('chatName')
+      clearInterval($scope.interval)
+      $scope.$apply()
+    })
     socket.on('say', function (data) {
       updateChatList()
       console.log(data)
-      var str = '<div class="chatContentLeft">' +
-                '<div class="chatLeftFlag1"></div>' +
-                '<div class="chatLeftFlag2"></div>' +
-                '<img src="/images/patient.png"/>' +
-                '<div>' +
-                  '<p>' + data.msg + '</p>' +
-                '</div>' +
-              '</div>'
-      window.$('.container').append(str)
+      var obj = {
+        'from': window.utils.getQuery('chatName'),
+        'to': window.utils.getQuery('username'),
+        'read': 0,
+        'msg': data.msg
+      }
+      $scope.chatDate.push(obj)
+      // var str = '<div class="chatContentLeft">' +
+      //           '<div class="chatLeftFlag1"></div>' +
+      //           '<div class="chatLeftFlag2"></div>' +
+      //           '<img src="/images/patient.png"/>' +
+      //           '<div>' +
+      //             '<p>' + data.msg + '</p>' +
+      //           '</div>' +
+      //         '</div>'
+      // window.$('.container').append(str)
+      socket.emit('see', {from: from, to: window.utils.getQuery('chatName')})
       window.$(document).scrollTop(window.$(document).height() - $scope.height)
     })
     $scope.say = function () {
-      var str = '<div class="chatContentRight">' +
-                  '<div class="chatRightFlag1"></div>' +
-                  '<div class="chatRightFlag2"></div>' +
-                  '<img src="/images/patient.png"/>' +
-                  '<div>' +
-                    '<p>' + $scope.input + '</p>' +
-                  '</div>' +
-                  '<div class="clear"></div>' +
-                '</div>'
-      window.$('.container').append(str)
+      var obj = {
+        'from': window.utils.getQuery('username'),
+        'to': window.utils.getQuery('chatName'),
+        'read': 0,
+        'msg': $scope.input
+      }
+      // var str = '<div class="chatContentRight">' +
+      //             '<div class="chatRightFlag1"></div>' +
+      //             '<div class="chatRightFlag2"></div>' +
+      //             '<img src="/images/patient.png"/>' +
+      //             '<div>' +
+      //               '<p>' + $scope.input + '</p>' +
+      //             '</div>' +
+      //             '<div class="clear"></div>' +
+      //           '</div>'
+      // window.$('.container').append(str)
+      $scope.chatDate.push(obj)
       window.$(document).scrollTop(window.$(document).height() - $scope.height)
       socket.emit('say', {from: from, to: window.utils.getQuery('chatName'), msg: $scope.input})
       $scope.input = ''
     }
     $scope.until = function (o) {
       console.log(o)
+    }
+    $scope.blur = function () {
+      socket.emit('blur', {from: from, to: window.utils.getQuery('chatName')})
+    }
+    $scope.focus = function () {
+      console.log(2)
+      socket.emit('focus', {from: from, to: window.utils.getQuery('chatName')})
+    }
+    $scope.back = function () {
+      var str = '/chatList?username=' + window.utils.getQuery('username')
+      window.location = str
     }
   }
   window.hyyApp.controller('chat', ['$scope', '$http', TimeByClinic])

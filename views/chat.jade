@@ -6,14 +6,16 @@ html(lang="zh-CN" ng-app="hyyApp" ng-controller="chat")
   include ./includes/head
     link(href="/stylesheets/chat.css" rel='stylesheet')
   body
-    //- p.chatCenter.title 与<span ng-bind='chatName'></span>聊天
+    p.chatCenter.title 
+      span.titleBack(ng-click='back()') &lt;&nbsp;back
+      span.titleName(ng-bind='showName')
     .container#contentChat
       div(ng-repeat='data in chatDate')
         .chatContentLeft(ng-if='data.to === username')
           .chatLeftFlag1
           .chatLeftFlag2
           img(src='/images/patient.png')
-          div 
+          div
             p(ng-bind='data.msg')
         .chatContentRight(ng-if='data.from === username')
           .chatRightFlag1
@@ -21,10 +23,11 @@ html(lang="zh-CN" ng-app="hyyApp" ng-controller="chat")
           img(src='/images/patient.png')
           div 
             p(ng-bind='data.msg' ng-click='until(data)')
+            span.chatStatus(ng-if='data.read') 已读
           .clear
     #chatInput
       .input-group
-        input.form-control(type="text" ng-model='input')
+        input.form-control(type="text" ng-model='input' ng-blur="blur()" ng-focus="focus()")
         span.input-group-btn
           botton.btn.btn-default(type="button" ng-click='say()' ng-if='input') submit
           botton.btn.btn-default(disabled type="button" ng-if='!input') submit

@@ -6,6 +6,7 @@ body{
 	bottom: 0;
 }
 #contentChat{
+	padding-top: 40px;
 	padding-bottom: 40px;
 }
 .chatContentLeft{
@@ -48,13 +49,25 @@ body{
 }
 .chatCenter{
 	text-align: center;
+	height: 40px;
 }
-
-
-
-
-
-
+.title{
+	width: 100%;
+	background: #999;
+	line-height: 40px;
+	position: fixed;
+	top: 0;
+	z-index: 2;
+}
+.titleName{
+	font-weight: bold;
+}
+.titleBack{
+	position: absolute;
+	left: 10px;
+	font-size: 14px;
+	font-weight: bold;
+}
 .chatContentRight{
 	width: 100%;
 	margin-top: 10px;
@@ -70,8 +83,22 @@ body{
 .chatContentRight div{
 	margin-right: 40px;
 }
+.chatStatus{
+	float: right;
+	width: 30px;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	margin-top: 5px;
+	margin-right: 5px;
+	font-size: 12px;
+	background: #999;
+	color: #fff;
+	border-radius: 7px;
+}
 .chatContentRight div p{
 	float: right;
+	max-width: 90%;
 	padding: 2px;
 	display: inline-block;
 	border: 1px solid #e1e1e8;

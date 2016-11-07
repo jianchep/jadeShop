@@ -1,5 +1,4 @@
   var TimeByClinic = function ($scope, $http) {
-    console.log(new Date(1475820838104).getFullYear())
     var socket = window.io.connect()
     var from = window.$.cookie('user')
     $scope.chatLists = []
